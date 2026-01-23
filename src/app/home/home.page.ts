@@ -1,0 +1,41 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
+
+@Component({
+  selector: 'app-home',
+  template: ` <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-title>welcome to learning a new language</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content [fullscreen]="true">
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large">home</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    </ion-content>`,
+  styles: ``,
+  standalone: true,
+  imports: [
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+  ],
+})
+export class HomePage implements OnInit {
+  constructor() {}
+
+  ngOnInit() {}
+}
