@@ -1,0 +1,7 @@
+{
+  "name": "akelius-test",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
