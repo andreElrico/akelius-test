@@ -1,26 +1,4 @@
-import { Route, Routes } from '@angular/router';
-
-const language: Route = {
-  path: ':lang',
-  loadComponent: () =>
-    import('./language/language.page').then((m) => m.LanguagePage),
-};
-
-const level: Route = {
-  path: ':level',
-  loadComponent: () => import('./level/level.page').then((m) => m.LevelPage),
-};
-
-const step: Route = {
-  path: ':step',
-  loadComponent: () => import('./step/step.page').then((m) => m.StepPage),
-};
-
-const lesson: Route = {
-  path: ':lesson',
-  loadComponent: () =>
-    import('./slideshow/slideshow.page').then((m) => m.SlideshowPage),
-};
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -30,27 +8,30 @@ export const routes: Routes = [
   },
   {
     path: 'home',
+    pathMatch: 'full',
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-    children: [
-      {
-        ...language,
-        children: [
-          {
-            ...level,
-            children: [
-              {
-                ...step,
-                children: [
-                  {
-                    ...lesson,
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+  },
+  {
+    path: 'home/language',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./language/language.page').then((m) => m.LanguagePage),
+  },
+  {
+    path: 'home/language/:lang',
+    pathMatch: 'full',
+    loadComponent: () => import('./level/level.page').then((m) => m.LevelPage),
+  },
+  {
+    path: 'home/language/:lang/:level',
+    pathMatch: 'full',
+    loadComponent: () => import('./step/step.page').then((m) => m.StepPage),
+  },
+  {
+    path: 'home/language/:lang/:level/:step',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./slideshow/slideshow.page').then((m) => m.SlideshowPage),
   },
   {
     path: '**',

@@ -17,20 +17,10 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  heartOutline,
-  heartSharp,
-  archiveOutline,
-  archiveSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp,
-  bookmarkOutline,
-  bookmarkSharp,
+  homeOutline,
+  homeSharp,
+  languageOutline,
+  languageSharp,
 } from 'ionicons/icons';
 
 @Component({
@@ -57,29 +47,15 @@ import {
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Home', url: 'home', icon: 'mail' },
-    { title: 'Language', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Home', url: 'home', icon: 'home' },
+    { title: 'Language', url: 'home/language', icon: 'language' },
   ];
   constructor() {
     addIcons({
-      mailOutline,
-      mailSharp,
-      paperPlaneOutline,
-      paperPlaneSharp,
-      heartOutline,
-      heartSharp,
-      archiveOutline,
-      archiveSharp,
-      trashOutline,
-      trashSharp,
-      warningOutline,
-      warningSharp,
-      bookmarkOutline,
-      bookmarkSharp,
+      homeSharp,
+      languageSharp,
+      homeOutline,
+      languageOutline,
     });
   }
 }

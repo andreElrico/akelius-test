@@ -12,14 +12,18 @@ import {
   selector: 'app-language',
   template: ` <ion-header [translucent]="true">
       <ion-toolbar>
-        <ion-title>language</ion-title>
+        <ion-title
+          >Which language are you ready to get dangerously good at?</ion-title
+        >
       </ion-toolbar>
     </ion-header>
 
     <ion-content [fullscreen]="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">language</ion-title>
+          <ion-title size="large"
+            >Which language are you ready to get dangerously good at?</ion-title
+          >
         </ion-toolbar>
       </ion-header>
     </ion-content>`,

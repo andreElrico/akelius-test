@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -7,6 +7,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-step',
@@ -22,7 +23,9 @@ import {
           <ion-title size="large">step</ion-title>
         </ion-toolbar>
       </ion-header>
-    </ion-content>`,
+    </ion-content>
+
+    <router-outlet></router-outlet>`,
   styles: ``,
   standalone: true,
   imports: [
@@ -32,10 +35,9 @@ import {
     IonToolbar,
     CommonModule,
     FormsModule,
+    RouterOutlet,
   ],
 })
 export class StepPage implements OnInit {
-  constructor() {}
-
   ngOnInit() {}
 }
