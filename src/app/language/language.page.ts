@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -7,28 +7,36 @@ import {
   IonTitle,
   IonToolbar,
   IonButton,
+  ToastController,
 } from '@ionic/angular/standalone';
 import { Api } from '../services/api';
 import { RouterLink } from '@angular/router';
+import { ErrorToast } from '../services/error-toast';
 
 @Component({
   selector: 'app-language',
   template: ` <ion-header [translucent]="true">
       <ion-toolbar>
-        <ion-title
-          >Which language are you ready to get dangerously good at?</ion-title
-        >
+        <ion-title>Choose your language</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content [fullscreen]="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large"
-            >Which language are you ready to get dangerously good at?</ion-title
-          >
+          <ion-title size="large">Choose your language</ion-title>
         </ion-toolbar>
       </ion-header>
+
+      <h2 class="ion-padding">
+        Which language are you ready to get dangerously good at?
+      </h2>
+
+      @if (languages.error()) {
+        <ion-button (click)="languages.reload()" expand="full">
+          Reload
+        </ion-button>
+      }
 
       <div class="flex-wrapper">
         @for (language of languages.value(); track $index) {
@@ -73,6 +81,17 @@ import { RouterLink } from '@angular/router';
 })
 export class LanguagePage {
   private api = inject(Api);
+  private errorToast = inject(ErrorToast);
 
   languages = this.api.languages;
+
+  constructor() {
+    effect(async () => {
+      if (this.languages.error()) {
+        await this.errorToast.show(
+          'Failed to load languages. Please try again.',
+        );
+      }
+    });
+  }
 }
