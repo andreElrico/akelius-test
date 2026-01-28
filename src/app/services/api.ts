@@ -5,9 +5,11 @@ import { environment } from 'src/environments/environment';
 import {
   ApiLanguages,
   ApiLevels,
+  ApiSlideshow,
   ApiSteps,
   Languages,
   Levels,
+  SlideLesson,
 } from './api.model';
 import { map } from 'rxjs';
 
@@ -41,6 +43,24 @@ export class Api {
       params: () => ({ levelId }),
       stream: ({ params }) =>
         this.http.get<ApiSteps>(`${this.baseUrl}/levels/${params.levelId}`),
+    });
+  }
+
+  getSlideshows(stepId: number) {
+    return rxResource<ApiSlideshow, { stepId: number }>({
+      params: () => ({ stepId }),
+      stream: ({ params }) =>
+        this.http.get<ApiSlideshow>(
+          `${this.baseUrl}/slideshows/${params.stepId}`,
+        ),
+    });
+  }
+
+  getSlide(slideId: number) {
+    return rxResource<SlideLesson, { slideId: number }>({
+      params: () => ({ slideId }),
+      stream: ({ params }) =>
+        this.http.get<SlideLesson>(`${this.baseUrl}/slides/${params.slideId}`),
     });
   }
   /*

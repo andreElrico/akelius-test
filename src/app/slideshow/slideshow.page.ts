@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  effect,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -6,24 +12,73 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonButton,
 } from '@ionic/angular/standalone';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Api } from '../services/api';
+import { ErrorToast } from '../services/error-toast';
+import { IonicSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-slideshow',
   template: ` <ion-header [translucent]="true">
       <ion-toolbar>
-        <ion-title>lesson</ion-title>
+        <ion-title>Choose your lesson</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content [fullscreen]="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">lesson</ion-title>
+          <ion-title size="large">Choose your lesson</ion-title>
         </ion-toolbar>
       </ion-header>
+
+      <h2 class="ion-padding">
+        Flip (left, right) through these lessons like you're looking for your
+        lost keys.
+      </h2>
+
+      @if (slides.error()) {
+        <ion-button (click)="slides.reload()" expand="full">
+          Reload
+        </ion-button>
+      }
+
+      <swiper-container [modules]="swiperModules">
+        @for (slide of slides.value()?.slides; track $index) {
+          <swiper-slide class="flex-wrapper">
+            <h2 class="flex-item">
+              Lesson {{ slide.id + 1 }} ({{ slide.template }})
+            </h2>
+
+            <ion-button
+              class="flex-item"
+              [fill]="'outline'"
+              [routerLink]="['./', slide.id]"
+            >
+              Enter lesson
+            </ion-button>
+          </swiper-slide>
+        }
+      </swiper-container>
     </ion-content>`,
-  styles: ``,
+  styles: `
+    .flex-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .flex-item {
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+  `,
   standalone: true,
   imports: [
     IonContent,
@@ -32,10 +87,27 @@ import {
     IonToolbar,
     CommonModule,
     FormsModule,
+    IonButton,
+    RouterLink,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SlideshowPage implements OnInit {
-  constructor() {}
+export class SlideshowPage {
+  private api = inject(Api);
+  private errorToast = inject(ErrorToast);
+  private route = inject(ActivatedRoute);
 
-  ngOnInit() {}
+  slides = this.api.getSlideshows(
+    this.route.snapshot.paramMap.get('step') as unknown as number,
+  );
+
+  swiperModules = [IonicSlides];
+
+  constructor() {
+    effect(async () => {
+      if (this.slides.error()) {
+        await this.errorToast.show('Failed to load slides. Please try again.');
+      }
+    });
+  }
 }

@@ -34,6 +34,12 @@ export const routes: Routes = [
       import('./slideshow/slideshow.page').then((m) => m.SlideshowPage),
   },
   {
+    path: 'home/language/:lang/:level/:step/:slide',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./slides/slides.page').then((m) => m.SlidesPage),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
