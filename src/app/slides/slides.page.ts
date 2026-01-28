@@ -4,6 +4,8 @@ import {
   computed,
   effect,
   inject,
+  OnDestroy,
+  OnInit,
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -21,6 +23,7 @@ import { Api } from '../services/api';
 import { ErrorToast } from '../services/error-toast';
 
 import { stringTemplateMapper, TemplateString } from './model';
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 
 @Component({
   selector: 'app-slides',
@@ -68,7 +71,7 @@ import { stringTemplateMapper, TemplateString } from './model';
     IonButton,
   ],
 })
-export class SlidesPage {
+export class SlidesPage implements OnInit, OnDestroy {
   private api = inject(Api);
   private errorToast = inject(ErrorToast);
   private route = inject(ActivatedRoute);
@@ -107,5 +110,24 @@ export class SlidesPage {
         await this.errorToast.show('Failed to load steps. Please try again.');
       }
     });
+  }
+
+  async ngOnInit() {
+    try {
+      // Locks the screen to landscape mode (usually primary)
+      await ScreenOrientation.lock({ orientation: 'landscape' });
+    } catch (err) {
+      // This will trigger on browser/web if not in full-screen
+      console.warn('Orientation lock failed:', err);
+    }
+  }
+
+  async ngOnDestroy() {
+    // Returns the app to the user's system settings (auto-rotate)
+    try {
+      await ScreenOrientation.unlock();
+    } catch (err) {
+      console.warn('Could not unlock orientation');
+    }
   }
 }

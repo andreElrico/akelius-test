@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
@@ -12,6 +12,7 @@ import {
 
 import { Api } from '../services/api';
 import { ErrorToast } from '../services/error-toast';
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 
 @Component({
   selector: 'app-step',
@@ -88,7 +89,7 @@ import { ErrorToast } from '../services/error-toast';
     RouterLink,
   ],
 })
-export class StepPage {
+export class StepPage implements OnInit, OnDestroy {
   private api = inject(Api);
   private errorToast = inject(ErrorToast);
   private route = inject(ActivatedRoute);
@@ -103,5 +104,19 @@ export class StepPage {
         await this.errorToast.show('Failed to load steps. Please try again.');
       }
     });
+  }
+
+  async ngOnInit() {
+    // Lock to portrait when entering this page
+    try {
+      await ScreenOrientation.lock({ orientation: 'portrait' });
+    } catch (err) {
+      console.log('Orientation lock not supported on this device');
+    }
+  }
+
+  async ngOnDestroy() {
+    // Very important: unlock so the rest of the app can rotate again
+    await ScreenOrientation.unlock();
   }
 }

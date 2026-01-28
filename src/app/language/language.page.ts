@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
@@ -9,6 +9,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 
 import { Api } from '../services/api';
 import { ErrorToast } from '../services/error-toast';
@@ -78,7 +79,7 @@ import { ErrorToast } from '../services/error-toast';
     RouterLink,
   ],
 })
-export class LanguagePage {
+export class LanguagePage implements OnInit, OnDestroy {
   private api = inject(Api);
   private errorToast = inject(ErrorToast);
 
@@ -92,5 +93,19 @@ export class LanguagePage {
         );
       }
     });
+  }
+
+  async ngOnInit() {
+    // Lock to portrait when entering this page
+    try {
+      await ScreenOrientation.lock({ orientation: 'portrait' });
+    } catch (err) {
+      console.log('Orientation lock not supported on this device');
+    }
+  }
+
+  async ngOnDestroy() {
+    // Very important: unlock so the rest of the app can rotate again
+    await ScreenOrientation.unlock();
   }
 }
