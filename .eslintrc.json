@@ -8,32 +8,47 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
+      "plugins": ["simple-import-sort", "unused-imports"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/component-class-suffix": [
+        "simple-import-sort/imports": [
           "error",
           {
-            "suffixes": ["Page", "Component"]
+            "groups": [
+              ["^@angular", "^@?\\w"], // Packages: Angular first, then others
+              ["^\\(src\\)"], // Internal aliases (if you use them)
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"], // Parent imports
+              ["^\\./(?=.*/)(?!/?$)", "^\\./?$"], // Relative imports
+              ["^.+\\.s?css$"] // Style imports
+            ]
           }
+        ],
+        "simple-import-sort/exports": "error",
+        "no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@angular-eslint/component-class-suffix": [
+          "error",
+          { "suffixes": ["Page", "Component"] }
         ],
         "@angular-eslint/component-selector": [
           "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
+          { "type": "element", "prefix": "app", "style": "kebab-case" }
         ],
         "@angular-eslint/directive-selector": [
           "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
+          { "type": "attribute", "prefix": "app", "style": "camelCase" }
         ]
       }
     },

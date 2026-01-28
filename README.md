@@ -1,0 +1,4 @@
+- make sure to use node version as defined in `.nvmrc`. Run `nvm use`.
+- start the project by running `npm run web_dev`.
+- make sure to run the test api `university-mobile-interview-test-server`.
+- for clarity this readme will mention swiper.js as 3rd party, but its recommended by the ionic project
