@@ -14,3 +14,5 @@ Problems issues:
   - inform user if cached data is used
 
 - gobal search for "todo" to see some remarks or problems mentioned
+
+- api was not working for the slides correctly. I fixed that locally.
