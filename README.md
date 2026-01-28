@@ -12,3 +12,5 @@ Problems issues:
   - use pwa with `ng add @angular/pwa`
   - save previous api data in a localstorage (use something like @capacitor/preferences), I created service app.ts to handle such task. Maybe http interceptors can be used.
   - inform user if cached data is used
+
+- gobal search for "todo" to see some remarks or problems mentioned
