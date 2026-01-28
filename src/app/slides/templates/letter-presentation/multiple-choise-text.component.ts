@@ -1,22 +1,23 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { SlideTemplate } from '../../model';
-import { MultipleChoiceText } from 'src/app/services/api.model';
+import { Component, input, signal } from '@angular/core';
 import {
   IonButton,
-  IonIcon,
   IonChip,
+  IonIcon,
+  IonItem,
   IonLabel,
   IonList,
-  IonItem,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
-  playOutline,
-  refreshOutline,
   checkmarkCircle,
   closeCircle,
+  playOutline,
+  refreshOutline,
 } from 'ionicons/icons';
+import { MultipleChoiceText } from 'src/app/services/api.model';
+
 import { goToNextSlide } from '../../helper';
+import { SlideTemplate } from '../../model';
 
 @Component({
   selector: 'app-multiple-choice-text',

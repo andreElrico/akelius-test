@@ -1,14 +1,15 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
+  IonButton,
   IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonButton,
 } from '@ionic/angular/standalone';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+
 import { Api } from '../services/api';
 import { ErrorToast } from '../services/error-toast';
 

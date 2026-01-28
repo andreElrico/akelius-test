@@ -1,23 +1,23 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   effect,
   inject,
-  OnInit,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { IonicSlides } from '@ionic/angular';
 import {
+  IonButton,
   IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonButton,
 } from '@ionic/angular/standalone';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+
 import { Api } from '../services/api';
 import { ErrorToast } from '../services/error-toast';
-import { IonicSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-slideshow',

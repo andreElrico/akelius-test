@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+
 import {
   ApiLanguages,
   ApiLevels,
@@ -11,7 +13,6 @@ import {
   Levels,
   SlideLesson,
 } from './api.model';
-import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

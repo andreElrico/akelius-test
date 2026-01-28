@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonApp,
-  IonSplitPane,
-  IonMenu,
   IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
   IonList,
   IonListHeader,
-  IonNote,
+  IonMenu,
   IonMenuToggle,
-  IonItem,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
+  IonNote,
   IonRouterLink,
+  IonRouterOutlet,
+  IonSplitPane,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -22,7 +22,6 @@ import {
   languageOutline,
   languageSharp,
 } from 'ionicons/icons';
-
 import { register } from 'swiper/element/bundle';
 
 register();

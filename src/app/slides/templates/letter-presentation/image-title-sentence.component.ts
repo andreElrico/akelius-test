@@ -1,14 +1,15 @@
-import { Component, input, signal, effect, untracked } from '@angular/core';
-import { SlideTemplate } from '../../model';
-import { ImageTitleSentence } from 'src/app/services/api.model'; // Assuming this exists
+import { Component, effect, input, signal, untracked } from '@angular/core';
 import { IonButton, IonIcon, IonImg } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  arrowForwardOutline,
   playOutline,
   refreshOutline,
-  arrowForwardOutline,
 } from 'ionicons/icons';
+import { ImageTitleSentence } from 'src/app/services/api.model'; // Assuming this exists
+
 import { goToNextSlide } from '../../helper';
+import { SlideTemplate } from '../../model';
 
 @Component({
   selector: 'app-image-title-sentence',

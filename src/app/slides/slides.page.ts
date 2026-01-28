@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   computed,
@@ -6,18 +7,19 @@ import {
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import {
+  IonButton,
   IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonButton,
 } from '@ionic/angular/standalone';
-import { ActivatedRoute } from '@angular/router';
+
 import { Api } from '../services/api';
 import { ErrorToast } from '../services/error-toast';
+
 import { stringTemplateMapper, TemplateString } from './model';
 
 @Component({

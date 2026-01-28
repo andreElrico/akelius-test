@@ -1,12 +1,14 @@
 import { InputSignal } from '@angular/core';
+
 import {
   LetterPresentation,
   MultipleChoiceText,
   SlideLesson,
 } from '../services/api.model';
+
+import { ImageTitleSentenceComponent } from './templates/letter-presentation/image-title-sentence.component';
 import { LetterPresentationComponent } from './templates/letter-presentation/letter-presentation.component';
 import { MultipleChoiceTextComponent } from './templates/letter-presentation/multiple-choise-text.component';
-import { ImageTitleSentenceComponent } from './templates/letter-presentation/image-title-sentence.component';
 
 export interface SlideTemplate<
   T = SlideLesson | LetterPresentation | MultipleChoiceText,
